@@ -16,7 +16,7 @@
       }
 
       :root {
-        --primary-color:rgb(57, 189, 5);
+        --primary-color: rgb(57, 189, 5);
         --secondary-color: #fff8e1;
         --accent-color: #ff6f61;
         --text-color: #333;
@@ -58,7 +58,7 @@
       .video-container {
         position: relative;
         width: 640px;
-        height: 480px; 
+        height: 480px;
         border: 6px solid var(--primary-color);
         border-radius: var(--border-radius);
         overflow: hidden;
@@ -69,8 +69,8 @@
       video {
         width: 100%;
         height: 100%;
-        object-fit: cover; 
-        transform: scaleX(-1); 
+        object-fit: cover;
+        transform: scaleX(-1);
       }
 
       #frameOverlay,
@@ -85,7 +85,7 @@
       #frameOverlay {
         opacity: 0.9;
         z-index: 3;
-        object-fit: fill; 
+        object-fit: fill;
         pointer-events: none;
       }
 
@@ -267,8 +267,8 @@
         }
 
         .video-container {
-          width: 80vw; 
-          height: calc(80vw * (3 / 4)); 
+          width: 80vw;
+          height: calc(80vw * (3 / 4));
           max-width: 640px;
           max-height: calc(640px * (3 / 4));
         }
@@ -290,13 +290,13 @@
           font-size: 2.5em;
         }
         .video-container {
-          width: 90vw; 
+          width: 90vw;
           height: calc(90vw * (4 / 3));
           max-width: 400px;
         }
 
         .strip {
-          flex-direction: row; 
+          flex-direction: row;
           flex-wrap: wrap;
           justify-content: center;
           width: 90vw;
@@ -304,7 +304,7 @@
         }
 
         .strip img {
-          width: 90px; 
+          width: 90px;
           height: 60px;
         }
 
@@ -319,7 +319,7 @@
           font-size: 2em;
         }
         .video-container {
-          width: 95vw; 
+          width: 95vw;
           height: calc(95vw * (4 / 3));
           max-width: 320px;
         }
@@ -378,52 +378,15 @@
 
       <h3>Pilih Stiker</h3>
       <div class="sticker-selection" id="stickerSelection">
-        <img
-          src="stickers/sticker1.png"
-          data-sticker-id="sticker1"
-          class="selected"
-          alt="Sticker 1"
-        />
-        <img
-          src="stickers/sticker2.png"
-          data-sticker-id="sticker2"
-          alt="Sticker 2"
-        />
-        <img
-          src="stickers/sticker3.png"
-          data-sticker-id="sticker3"
-          alt="Sticker 3"
-        />
-        <img
-          src="stickers/sticker4.png"
-          data-sticker-id="sticker4"
-          alt="Sticker 4"
-        />
-        <img
-          src="stickers/sticker5.png"
-          data-sticker-id="sticker5"
-          alt="Sticker 5"
-        />
-        <img
-          src="stickers/sticker6.png"
-          data-sticker-id="sticker6"
-          alt="Sticker 6"
-        />
-        <img
-          src="stickers/sticker7.png"
-          data-sticker-id="sticker7"
-          alt="Sticker 7"
-        />
-        <img
-          src="stickers/sticker8.png"
-          data-sticker-id="sticker8"
-          alt="Sticker 8"
-        />
-        <img
-          src="stickers/sticker9.png"
-          data-sticker-id="sticker9"
-          alt="Sticker 9"
-        />
+        <img src="stickers/sticker1.png" data-sticker-id="sticker1" alt="Sticker 1" />
+        <img src="stickers/sticker2.png" data-sticker-id="sticker2" alt="Sticker 2" />
+        <img src="stickers/sticker3.png" data-sticker-id="sticker3" alt="Sticker 3" />
+        <img src="stickers/sticker4.png" data-sticker-id="sticker4" alt="Sticker 4" />
+        <img src="stickers/sticker5.png" data-sticker-id="sticker5" alt="Sticker 5" />
+        <img src="stickers/sticker6.png" data-sticker-id="sticker6" alt="Sticker 6" />
+        <img src="stickers/sticker7.png" data-sticker-id="sticker7" alt="Sticker 7" />
+        <img src="stickers/sticker8.png" data-sticker-id="sticker8" alt="Sticker 8" />
+        <img src="stickers/sticker9.png" data-sticker-id="sticker9" alt="Sticker 9" />
       </div>
 
       <h3>Atur Timer Per Jepretan</h3>
@@ -474,8 +437,8 @@
       let currentCountdownTime = 3;
       let cameraReady = false;
       let frameLoaded = false;
-      let bottomImageLoaded = false; 
-      let stickerLoaded = false;
+      let bottomImageLoaded = false;
+      let stickerLoaded = false; // Akan diatur true saat inisialisasi awal karena tidak ada stiker yang dimuat
       let currentSnap = 0;
 
       function initializeCamera() {
@@ -508,6 +471,14 @@
       }
 
       function checkReadyState() {
+       
+        console.log(`
+          [READY CHECK]
+          Camera Ready: ${cameraReady}
+          Frame Loaded: ${frameLoaded}
+          Bottom Image Loaded: ${bottomImageLoaded}
+          Sticker Loaded: ${stickerLoaded}
+        `);
         if (cameraReady && frameLoaded && bottomImageLoaded && stickerLoaded) {
           startButton.disabled = false;
           console.log(
@@ -542,7 +513,7 @@
           !cameraReady ||
           !frameLoaded ||
           !bottomImageLoaded ||
-          !stickerLoaded
+          !stickerLoaded 
         ) {
           alert(
             "Sistem belum siap. Pastikan kamera diizinkan dan semua aset (frame/bottom image/stiker) sudah dimuat."
@@ -615,37 +586,40 @@
           );
           hiddenCtx.restore();
 
-          const stickerNaturalWidth = sticker.naturalWidth;
-          const stickerNaturalHeight = sticker.naturalHeight;
-          const stickerAspectRatio = stickerNaturalWidth / stickerNaturalHeight;
+          if (sticker.src && !sticker.src.includes("data:,")) {
+            const stickerNaturalWidth = sticker.naturalWidth;
+            const stickerNaturalHeight = sticker.naturalHeight;
+            const stickerAspectRatio =
+              stickerNaturalWidth / stickerNaturalHeight;
 
-          let stickerDrawWidth;
-          let stickerDrawHeight;
-          let stickerDrawX;
-          let stickerDrawY;
+            let stickerDrawWidth;
+            let stickerDrawHeight;
+            let stickerDrawX;
+            let stickerDrawY;
 
-          const targetCanvasAspectRatio =
-            hiddenCanvas.width / hiddenCanvas.height;
+            const targetCanvasAspectRatio =
+              hiddenCanvas.width / hiddenCanvas.height;
 
-          if (stickerAspectRatio > targetCanvasAspectRatio) {
-            stickerDrawWidth = hiddenCanvas.width;
-            stickerDrawHeight = hiddenCanvas.width / stickerAspectRatio;
-            stickerDrawX = 0;
-            stickerDrawY = (hiddenCanvas.height - stickerDrawHeight) / 2;
-          } else {
-            stickerDrawHeight = hiddenCanvas.height;
-            stickerDrawWidth = hiddenCanvas.height * stickerAspectRatio;
-            stickerDrawX = (hiddenCanvas.width - stickerDrawWidth) / 2;
-            stickerDrawY = 0;
+            if (stickerAspectRatio > targetCanvasAspectRatio) {
+              stickerDrawWidth = hiddenCanvas.width;
+              stickerDrawHeight = hiddenCanvas.width / stickerAspectRatio;
+              stickerDrawX = 0;
+              stickerDrawY = (hiddenCanvas.height - stickerDrawHeight) / 2;
+            } else {
+              stickerDrawHeight = hiddenCanvas.height;
+              stickerDrawWidth = hiddenCanvas.height * stickerAspectRatio;
+              stickerDrawX = (hiddenCanvas.width - stickerDrawWidth) / 2;
+              stickerDrawY = 0;
+            }
+
+            hiddenCtx.drawImage(
+              sticker,
+              stickerDrawX,
+              stickerDrawY,
+              stickerDrawWidth,
+              stickerDrawHeight
+            );
           }
-
-          hiddenCtx.drawImage(
-            sticker,
-            stickerDrawX,
-            stickerDrawY,
-            stickerDrawWidth,
-            stickerDrawHeight
-          );
 
           //frame overlay terakhir
           hiddenCtx.drawImage(
@@ -726,7 +700,7 @@
             allImagesToDraw.push(photoStripImages[i]);
           }
         }
-        
+
         if (
           bottomImageElement.src &&
           !bottomImageElement.src.includes("data:,")
@@ -744,9 +718,9 @@
             tempImg.onload = resolve;
             tempImg.onerror = () => {
               console.error(
-                `Failed to load image for height calculation: ${tempImg.src}`
+                `gagal image load: ${tempImg.src}`
               );
-              resolve(); 
+              resolve();
             };
           });
 
@@ -756,7 +730,7 @@
             calculatedPhotoHeights.push(targetPhotoHeight);
             totalStripHeight += targetPhotoHeight;
           } else {
-            calculatedPhotoHeights.push(0); 
+            calculatedPhotoHeights.push(0);
           }
         }
 
@@ -785,7 +759,7 @@
                 console.error(
                   `Failed to load image for drawing: ${imgToDraw.src}`
                 );
-                resolve(); 
+                resolve();
               };
             });
 
@@ -799,7 +773,7 @@
               );
             }
           }
-          currentY += targetPhotoHeight; 
+          currentY += targetPhotoHeight;
         }
 
         const link = document.createElement("a");
@@ -819,10 +793,17 @@
           sticker.src = e.target.src;
           sticker.onload = () => {
             stickerLoaded = true;
+            console.log(
+              `[STIKER CHANGE] Sticker load. Natural size: ${sticker.naturalWidth}x${sticker.naturalHeight}`
+            );
             checkReadyState();
           };
+          
           if (sticker.complete) {
             stickerLoaded = true;
+            console.log(
+              `[STIKER CHANGE] (load cache). Natural size: ${sticker.naturalWidth}x${sticker.naturalHeight}`
+            );
             checkReadyState();
           }
         }
@@ -844,7 +825,6 @@
             checkReadyState();
           };
           if (frameOverlay.complete) {
-           
             frameLoaded = true;
           }
 
@@ -857,7 +837,7 @@
           if (bottomImageElement.complete) {
             bottomImageLoaded = true;
           }
-          checkReadyState(); 
+          checkReadyState();
         }
       });
 
@@ -878,9 +858,10 @@
       downloadButton.onclick = downloadPhotoStrip;
       nextSnapButton.onclick = performSingleCapture;
 
+      // Inisialisasi kamera saat halaman dimuat
       initializeCamera();
 
-      // inisialisasi frame dan bottom default
+      // Inisialisasi frame dan bottom default
       const defaultFrame = document.querySelector(
         "#frameSelection img.selected"
       );
@@ -915,30 +896,10 @@
         bottomImageLoaded = false;
       }
 
-      // inisialisasi stiker default
-      const defaultSticker = document.querySelector(
-        "#stickerSelection img.selected"
-      );
-      if (defaultSticker) {
-        sticker.src = defaultSticker.src;
-        sticker.onload = () => {
-          stickerLoaded = true;
-          console.log(
-            `[INIT] Sticker loaded. Natural size: ${sticker.naturalWidth}x${sticker.naturalHeight}`
-          );
-          checkReadyState();
-        };
-        if (sticker.complete) {
-          stickerLoaded = true;
-          console.log(
-            `[INIT] Sticker already loaded (from cache). Natural size: ${sticker.naturalWidth}x${sticker.naturalHeight}`
-          );
-        }
-      } else {
-        console.warn("[INIT] No default sticker selected. Please check HTML.");
-        stickerLoaded = false;
-      }
-
+      sticker.src = "";
+      stickerLoaded = true; 
+      console.log("[INIT] default");
+     
       checkReadyState(); 
     </script>
   </body>
